@@ -7,8 +7,10 @@ import AdventureMap from './components/AdventureMap'
 import LocationPreview from './components/LocationPreview'
 import MissionBriefing from './components/MissionBriefing'
 import GameHeader from './components/GameHeader'
+import PuzzleBoard from './components/puzzle/PuzzleBoard'
 
 import { locations } from './data/locations'
+import { puzzleLevels } from './game/puzzleLevels'
 
 import type { Location, Screen } from './types/game'
 
@@ -17,6 +19,9 @@ function App() {
 
   const [selectedLocation, setSelectedLocation] =
     useState<Location>(locations[0])
+
+  // First playable puzzle for our prototype.
+  const currentPuzzle = puzzleLevels[0]
 
   return (
     <main className="home-screen">
@@ -50,9 +55,9 @@ function App() {
         />
       )}
 
-      {/* TEMPORARY PUZZLE PLACEHOLDER */}
+      {/* INTERACTIVE PUZZLE */}
       {screen === 'puzzle' && (
-        <main className="game-screen">
+        <div className="game-screen">
 
           <GameHeader
             onBack={() => setScreen('briefing')}
@@ -60,33 +65,13 @@ function App() {
             sectionLabel={`MISSION 00${selectedLocation.id}`}
           />
 
-          <section className="game-content">
+          <div className="game-content">
+            <PuzzleBoard
+              level={currentPuzzle}
+            />
+          </div>
 
-            <p className="eyebrow">
-              ANCIENT WATER SYSTEM
-            </p>
-
-            <h2>{selectedLocation.name}</h2>
-
-            <p>
-              The ancient water system awaits restoration.
-              Your puzzle adventure begins here.
-            </p>
-
-            <p>
-              The interactive water-routing puzzle
-              will be developed in our next milestone.
-            </p>
-
-            <button
-              className="primary-button"
-              onClick={() => setScreen('briefing')}
-            >
-              ← Back to Briefing
-            </button>
-
-          </section>
-        </main>
+        </div>
       )}
 
       {/* FOOTER */}

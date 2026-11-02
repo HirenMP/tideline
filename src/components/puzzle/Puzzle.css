@@ -1,0 +1,262 @@
+
+/* =================================
+   TIDELINE — PUZZLE SYSTEM
+================================= */
+
+.puzzle-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+  color: #f3ead8;
+}
+
+.puzzle-heading {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.puzzle-heading .eyebrow {
+  color: #c4a66b;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.puzzle-heading h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  margin-bottom: 8px;
+}
+
+.puzzle-heading p:last-child {
+  color: #c8d4c8;
+  line-height: 1.6;
+}
+
+/* Puzzle grid */
+
+.puzzle-board {
+  display: grid;
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1;
+  margin: 0 auto 28px;
+  gap: 6px;
+  padding: 10px;
+  background: rgba(9, 28, 27, 0.8);
+  border: 1px solid rgba(196, 166, 107, 0.3);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Individual tiles */
+
+.puzzle-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid rgba(196, 166, 107, 0.14);
+  border-radius: 9px;
+  background: #163d35;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+  touch-action: manipulation;
+}
+
+.puzzle-tile:not(:disabled):hover {
+  background: #205448;
+  border-color: #c4a66b;
+}
+
+.puzzle-tile:not(:disabled):active {
+  transform: scale(0.94);
+}
+
+.puzzle-tile:focus-visible {
+  outline: 3px solid #d6b779;
+  outline-offset: 2px;
+}
+
+.puzzle-tile:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.tile-pipe {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.pipe-line {
+  stroke: #b9a47a;
+  stroke-width: 15;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.pipe-joint {
+  fill: #b9a47a;
+}
+
+.tile-empty {
+  background: rgba(22, 61, 53, 0.3);
+  border-color: rgba(196, 166, 107, 0.05);
+}
+
+.tile-source {
+  background: #205b52;
+}
+
+.tile-destination {
+  background: #3d513b;
+}
+
+.source-symbol {
+  fill: #6dc6c0;
+  stroke: #d6f1dc;
+  stroke-width: 3;
+}
+
+.destination-symbol {
+  fill: #d6b779;
+  stroke: #f3ead8;
+  stroke-width: 2;
+}
+
+.tile-rotate-indicator {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+  color: rgba(243, 234, 216, 0.55);
+  font-size: clamp(9px, 2vw, 14px);
+  pointer-events: none;
+}
+
+.water-connected {
+  background: #176b68;
+  border-color: #80d6cc;
+}
+
+.water-connected .pipe-line {
+  stroke: #8ce8e0;
+}
+
+.water-connected .pipe-joint {
+  fill: #8ce8e0;
+}
+
+/* Controls */
+
+.puzzle-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.puzzle-secondary-button,
+.puzzle-release-button {
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.puzzle-secondary-button {
+  color: #f3ead8;
+  background: rgba(22, 61, 53, 0.85);
+  border: 1px solid rgba(196, 166, 107, 0.4);
+}
+
+.puzzle-release-button {
+  color: #102c29;
+  background: #d6b779;
+  border: 1px solid #e8d39e;
+}
+
+.puzzle-secondary-button:disabled,
+.puzzle-release-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.puzzle-secondary-button:focus-visible,
+.puzzle-release-button:focus-visible {
+  outline: 3px solid #d6b779;
+  outline-offset: 3px;
+}
+
+/* Feedback */
+
+.puzzle-feedback {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.puzzle-success {
+  color: #d8f1d5;
+  background: rgba(43, 112, 75, 0.35);
+  border: 1px solid rgba(116, 190, 133, 0.5);
+}
+
+.puzzle-error {
+  color: #f0d9bd;
+  background: rgba(130, 82, 43, 0.25);
+  border: 1px solid rgba(196, 166, 107, 0.4);
+}
+
+/* Small screens */
+
+@media (max-width: 480px) {
+  .puzzle-container {
+    padding: 18px 10px 30px;
+  }
+
+  .puzzle-board {
+    gap: 4px;
+    padding: 6px;
+    border-radius: 12px;
+  }
+
+  .puzzle-tile {
+    border-radius: 6px;
+  }
+
+  .puzzle-controls {
+    gap: 8px;
+  }
+
+  .puzzle-secondary-button,
+  .puzzle-release-button {
+    flex: 1 1 40%;
+    padding: 11px 10px;
+    font-size: 0.82rem;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .puzzle-tile {
+    transition: none;
+  }
+}
